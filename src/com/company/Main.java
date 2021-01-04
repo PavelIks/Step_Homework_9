@@ -1,17 +1,89 @@
 package com.company;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import javax.annotation.processing.SupportedSourceVersion;
 import java.io.*;
 
-public class Main
+/*Задание 2 Пользователь с клавиатуры вводит путь к файлу.
+Программа должна найти длину самой длинной строки. После работы программы на
+экран отображается полученное число и сама строка.*/
+
+class Main
 {
-    public static void main(String[] args)
+    public static void main(String args[])
+    {
+        String str1 = "abcd_1234\nabcd_1234_2\nabcd_1234__2";
+
+        String[] paragraphs = str1.toString().split("\n");
+
+        String[] words1 = str1.split(" ");
+        int length1 = 0;
+        for (String word : words1)
+        {
+            if (length1 < word.length())
+            {
+                length1 = word.length();
+            }
+        }
+
+        for (int i = 0; i < paragraphs.length-1; i++)
+        {
+            if (paragraphs[i].length() > paragraphs[i + 1].length())
+            {
+                String temp = paragraphs[i];
+                paragraphs[i] = paragraphs[i + 1];
+                paragraphs[i + 1] = temp;
+            }
+        }
+
+        System.out.println("Количество символов у самого длинного абзаца: " + length1);
+        System.out.println("Количество абзацов: " + paragraphs.length);
+        System.out.println("Всего символов: " + str1.length());
+        System.out.println("Строка самого длинного абзаца: " + paragraphs[paragraphs.length-1]);
+    }
+}
+
+// Считает параграфы...
+/*class FileUtil
+{
+    public int getParaCount() throws IOException
+    {
+        String a = "KUKU1.txt";
+        File file = new File(a);
+        FileInputStream fileStream = new FileInputStream(file);
+        byte[] byteArray = new byte[(int)file.length()];
+        fileStream.read(byteArray);
+        String data = new String(byteArray);
+        String[] paragraphs = data.toString().split("\n");
+
+        return paragraphs.length;
+    }
+}
+
+class Main
+{
+    public static void main(String args[]) throws IOException
+    {
+        FileUtil fileUtil = new FileUtil();
+        System.out.println(fileUtil.getParaCount());
+    }
+}*/
+
+
+/*Задание 1 Пользователь вводит с клавиатуры пути к двум текстовым файла.
+Программа должна проверить совпадают ли их строки. Если нет, то вывести
+несовпадающую строку из каждого файла.*/
+
+/*class Main
+{
+    public static void main(String args[]) throws IOException
     {
         String fileName1 = "KUKU1.txt";
         String fileName2 = "KUKU2.txt";
         File file1 = new File(fileName1);
         File file2 = new File(fileName2);
-        if(file1.exists() || file2.exists())
+        if (file1.exists() || file2.exists())
         {
             try
                     (
@@ -36,18 +108,17 @@ public class Main
                     System.out.println("+");
                 }
                 else
-                {
-                    System.out.println("-");
-                }
-            }
-            catch (IOException ex)
+                    {
+                        System.out.println("-");
+                    }
+            } catch (IOException ex)
             {
                 System.out.println(ex.getMessage());
             }
         }
         else
-        {
-            System.out.println("-");
+            {
+                System.out.println("-");
         }
     }
-}
+}*/
